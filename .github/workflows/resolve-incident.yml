@@ -6,7 +6,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
 
 jobs:
   resolve-incident:
@@ -19,8 +18,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Resolve incident
-        run: |
-          node src/cli.mjs incident resolve ${{ github.event.issue.number }}
+        run: node src/index.mjs incident resolve ${{ github.event.issue.number }}
 
       - name: Commit changes
         run: |

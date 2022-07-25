@@ -6,16 +6,10 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   create-incident:
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v2
@@ -26,9 +20,12 @@ jobs:
 
       - name: Create incident
         run: |
-          node src/cli.mjs incident create ${{ github.event.issue.number }} \
+          node src/index.mjs incident create ${{ github.event.issue.number }} \
             --title "${{ github.event.issue.title }}" \
             --text "${{ github.event.issue.body }}"
+
+      - run: ls -Rla
+      - run: git status
 
       - name: Commit changes
         run: |
