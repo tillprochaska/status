@@ -1,0 +1,10 @@
+title: Degraded Performance
+text: Processing ingested files currently takes longer than usual. If you have recently uploaded new document that haven’t been processed completely, please check back later.
+level: minor
+createdAt: 2022-07-25T12:45:02
+resolvedAt: 2022-07-25T13:55:00
+updates:
+  - createdAt: 2022-07-25T13:03:12
+    text: We have identified the issue and are working on a fix.
+  - createdAt: 2022-07-25T13:55:00
+    text: We have solved the issue.
