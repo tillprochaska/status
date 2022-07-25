@@ -1,0 +1,21 @@
+name: Incident
+description: Create a new incident.
+body:
+  - id: level
+    type: dropdown
+    attributes:
+      label: Level
+      options:
+        - Info
+        - Minor
+        - Major
+    validations:
+      required: true
+
+  - id: text
+    type: textarea
+    attributes:
+      label: Text
+      placeholder: Provide a conside description of the incident. Make it clear to users what will happen next and how they are impacted.
+    validations:
+      required: true
