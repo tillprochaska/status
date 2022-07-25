@@ -1,0 +1,8 @@
+id: "8"
+title: Degraded ingest performance
+createdAt: 2022-07-25T20:39:15.163Z
+resolvedAt: null
+level: null
+text: Processing ingested files currently takes longer than usual. If you have
+  recently uploaded new document that haven’t been processed completely, please
+  check back later.
