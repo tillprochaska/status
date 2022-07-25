@@ -52,15 +52,17 @@ export function build() {
 }
 
 export function createIncident(id, data = {}) {
+  id = id.toString();
   const incident = new Incident(id, data);
   const dataPath = resolve(DATA_DIR, id, 'incident.yml');
   const contents = stringify(incident);
 
-  mkdirSync(dirname(dataPath));
+  mkdirSync(dirname(dataPath), { recursive: true });
   writeFileSync(dataPath, contents);
 }
 
 export function resolveIncident(id, date) {
+  id = id.toString();
   const dataPath = resolve(DATA_DIR, id, 'incident.yml');
   const data = parse(readFileSync(dataPath, 'utf-8'));
   const resolvedAt = new Date(date);
