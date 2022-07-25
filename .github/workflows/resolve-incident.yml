@@ -1,0 +1,29 @@
+name: Resolve incident
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  resolve-incident:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve incident
+        run: |
+          node src/cli.mjs incident resolve ${{ github.event.issue.number }}
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Resolve incident #${{ github.event.issue.number }}"
+          git push

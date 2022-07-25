@@ -48,6 +48,7 @@ export function build() {
   const outputPath = resolve(BUILD_DIR, 'incidents.json')
   const contents = JSON.stringify(incidents);
 
+  mkdirSync(BUILD_DIR, { recursive: true });
   writeFileSync(outputPath, contents);
 }
 

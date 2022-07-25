@@ -1,0 +1,37 @@
+name: Create incident
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  create-incident:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/actions/setup
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create incident
+        run: |
+          node src/cli.mjs incident create ${{ github.event.issue.number }} \
+            --title "${{ github.event.issue.title }}" \
+            --text "${{ github.event.issue.body }}"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Create incident #${{ github.event.issue.number }}"
+          git push

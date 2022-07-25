@@ -1,0 +1,18 @@
+name: 'Setup'
+inputs:
+  token:
+    description: 'GitHub Token'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Set up git
+      shell: bash
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git remote set-url origin https://${{ github.repository_owner }}:${{ inputs.token }}@github.com/${{ github.repository }}
